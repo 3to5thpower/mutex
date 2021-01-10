@@ -11,14 +11,14 @@ class empty_queue : std::exception {
 };
 
 template <typename T>
-class safe_queue {
+class safeQueue {
    public:
-    safe_queue() : que(Mutex<std::queue<T>>(std::queue<T>())) {}
-    safe_queue(safe_queue const& other) {
+    safeQueue() : que(Mutex<std::queue<T>>(std::queue<T>())) {}
+    safeQueue(safeQueue const& other) {
         other.que.lock();
         que = other.que;
     }
-    safe_queue& operator=(safe_queue const&) = delete;
+    safeQueue& operator=(safeQueue const&) = delete;
     void push(T value) { this->que.lock()->push(value); }
     void pop(T& res) {
         auto q = this->que.lock();

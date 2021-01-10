@@ -8,7 +8,7 @@ class MutexGuard;
 
 template <typename T>
 struct Mutex {
-    Mutex() {}
+    Mutex() = delete;
     Mutex(T&& value)
         : data(std::make_shared<T>(value)),
           mutex(std::unique_ptr<std::mutex>(new std::mutex)) {}

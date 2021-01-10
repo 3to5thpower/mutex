@@ -8,14 +8,14 @@ class empty_queue : std::exception {
 };
 
 template <typename T>
-class safe_queue {
+class safeQueue {
    public:
-    safe_queue() {}
-    safe_queue(safe_queue const& other) {
+    safeQueue() {}
+    safeQueue(safeQueue const& other) {
         std::lock_guard<std::mutex> lock(other.m);
         que = other.que;
     }
-    safe_queue& operator=(safe_queue const&) = delete;
+    safeQueue& operator=(safeQueue const&) = delete;
     void push(T value) {
         std::lock_guard<std::mutex> lock(m);
         que.push(value);
